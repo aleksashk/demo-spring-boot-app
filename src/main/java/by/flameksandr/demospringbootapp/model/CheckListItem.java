@@ -1,8 +1,6 @@
 package by.flameksandr.demospringbootapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,16 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "checklist-items")
+@Table(name = "checklist items")
 public class CheckListItem {
 
     @Id
+    @jakarta.persistence.Column(name = "checklist_item_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String text;
 
     private boolean checked;
 
+    @ManyToOne
+    @JoinColumn(name = "card_id")
     private Card card;
 
 }
