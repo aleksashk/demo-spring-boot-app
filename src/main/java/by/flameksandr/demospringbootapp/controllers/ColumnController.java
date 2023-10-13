@@ -5,6 +5,7 @@ import by.flameksandr.demospringbootapp.repositories.ColumnRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -22,7 +23,16 @@ public class ColumnController {
     @PostMapping(path = "all")
     @ResponseBody
     public List<Column> getAllColumns() {
-        List<Column> columns = columnRepository.findAll();
-        return columns;
+        return columnRepository.findAll();
+    }
+
+    @PostMapping(path = "add")
+    @ResponseBody
+    public Column addColumn(@RequestParam String title) {
+        Column column = new Column();
+        column.setTitle(title);
+
+        columnRepository.save(column);
+        return column;
     }
 }
