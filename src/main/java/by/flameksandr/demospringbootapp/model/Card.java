@@ -1,5 +1,6 @@
 package by.flameksandr.demospringbootapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,5 +30,15 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "column_id")
+    @JsonIgnoreProperties({"cards"})
     private Column column;
+
+    public Card(Card card) {
+        this.title = card.getTitle();
+        this.description = card.getDescription();
+        this.column = card.getColumn();
+        for (CheckListItem item : card.getCheckListItems()) {
+            this.checkListItems.add(new CheckListItem(item.getText(), this, item.isChecked()));
+        }
+    }
 }

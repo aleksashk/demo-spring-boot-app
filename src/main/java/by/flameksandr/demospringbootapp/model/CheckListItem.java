@@ -25,4 +25,9 @@ public class CheckListItem {
     @JoinColumn(name = "card_id")
     private Card card;
 
+    public CheckListItem(String text, Card card, boolean checked) {
+        this.text = text;
+        this.card = card;
+        this.checked = checked;
+    }
 }
