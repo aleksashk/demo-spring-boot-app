@@ -1,5 +1,6 @@
 package by.flameksandr.demospringbootapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class CheckListItem {
 
     @ManyToOne
     @JoinColumn(name = "card_id")
+    @JsonIgnoreProperties({"checkListItems"})
     private Card card;
 
     public CheckListItem(String text, Card card, boolean checked) {
